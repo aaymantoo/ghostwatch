@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GHOST"
+            android:textColor="@color/accent"
+            android:textSize="32sp"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.3"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WATCH"
+            android:textColor="@color/text_bright"
+            android:textSize="32sp"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.3"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SMS-ACTIVATED HOME MONITOR"
+            android:textColor="@color/text_muted"
+            android:textSize="10sp"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.3"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Status Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/card_bg"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <View
+                android:id="@+id/statusIndicator"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/dot_red"
+                android:layout_marginEnd="12dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="INACTIVE"
+                    android:textColor="@color/text_bright"
+                    android:textSize="13sp"
+                    android:fontFamily="monospace" />
+
+                <TextView
+                    android:id="@+id/tvAlerts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alerts sent: 0"
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp"
+                    android:fontFamily="monospace"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Buttons -->
+        <Button
+            android:id="@+id/btnActivate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ACTIVATE MONITORING"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.2"
+            android:backgroundTint="@color/accent"
+            android:textColor="@color/bg"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btnDeactivate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEACTIVATE"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.2"
+            android:backgroundTint="@color/warn"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="8dp"
+            android:enabled="false" />
+
+        <Button
+            android:id="@+id/btnStealth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="◉  STEALTH — HIDE APP"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.2"
+            android:backgroundTint="@color/panel"
+            android:textColor="@color/text_muted"
+            android:layout_marginTop="8dp" />
+
+        <!-- Call watch toggle (independent of sound monitoring) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/card_bg"
+            android:padding="14dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <View
+                android:id="@+id/callWatchIndicator"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/dot_red"
+                android:layout_marginEnd="10dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CALL WATCH"
+                    android:textColor="@color/text_muted"
+                    android:textSize="9sp"
+                    android:fontFamily="monospace"
+                    android:letterSpacing="0.3" />
+
+                <TextView
+                    android:id="@+id/tvCallWatchStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OFF — calls not tracked"
+                    android:textColor="@color/text_bright"
+                    android:textSize="11sp"
+                    android:fontFamily="monospace"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnCallWatch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TURN ON"
+                android:fontFamily="monospace"
+                android:textSize="10sp"
+                android:backgroundTint="@color/ok"
+                android:textColor="@color/bg" />
+
+        </LinearLayout>
+
+        <!-- Device admin — required for stealth screen lock -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/card_bg"
+            android:padding="14dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <View
+                android:id="@+id/adminIndicator"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/dot_red"
+                android:layout_marginEnd="10dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="STEALTH SCREEN LOCK"
+                    android:textColor="@color/text_muted"
+                    android:textSize="9sp"
+                    android:fontFamily="monospace"
+                    android:letterSpacing="0.3" />
+
+                <TextView
+                    android:id="@+id/tvAdminStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not active — screen visible on answer"
+                    android:textColor="@color/text_bright"
+                    android:textSize="11sp"
+                    android:fontFamily="monospace"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ENABLE"
+                android:fontFamily="monospace"
+                android:textSize="10sp"
+                android:backgroundTint="@color/accent"
+                android:textColor="@color/bg" />
+
+        </LinearLayout>
+
+        <!-- Auto-answer accessibility service status (Xiaomi/MIUI) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/card_bg"
+            android:padding="14dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <View
+                android:id="@+id/accessibilityIndicator"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/dot_red"
+                android:layout_marginEnd="10dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AUTO-ANSWER (XIAOMI)"
+                    android:textColor="@color/text_muted"
+                    android:textSize="9sp"
+                    android:fontFamily="monospace"
+                    android:letterSpacing="0.3" />
+
+                <TextView
+                    android:id="@+id/tvAccessibilityStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accessibility not enabled"
+                    android:textColor="@color/text_bright"
+                    android:textSize="11sp"
+                    android:fontFamily="monospace"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnAccessibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ENABLE"
+                android:fontFamily="monospace"
+                android:textSize="10sp"
+                android:backgroundTint="@color/accent"
+                android:textColor="@color/bg" />
+
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Config Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONFIGURATION"
+            android:textColor="@color/text_muted"
+            android:textSize="10sp"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.4"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Config rows -->
+        <include layout="@layout/config_row"
+            android:id="@+id/rowTrusted" />
+
+        <!-- We'll set these programmatically but define the structure -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="14dp"
+            android:layout_marginBottom="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TRUSTED NUMBER"
+                android:textColor="@color/text_muted"
+                android:textSize="9sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.3" />
+            <TextView
+                android:id="@+id/tvTrustedNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+91XXXXXXXXXX"
+                android:textColor="@color/text_bright"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="14dp"
+            android:layout_marginBottom="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SMS COMMANDS"
+                android:textColor="@color/text_muted"
+                android:textSize="9sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.3" />
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="8dp">
+                <TextView android:layout_width="70dp" android:layout_height="wrap_content"
+                    android:text="START" android:textColor="@color/text_muted"
+                    android:textSize="11sp" android:fontFamily="monospace" />
+                <TextView android:id="@+id/tvCmdStart" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:textColor="@color/ok"
+                    android:textSize="11sp" android:fontFamily="monospace" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="4dp">
+                <TextView android:layout_width="70dp" android:layout_height="wrap_content"
+                    android:text="STOP" android:textColor="@color/text_muted"
+                    android:textSize="11sp" android:fontFamily="monospace" />
+                <TextView android:id="@+id/tvCmdStop" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:textColor="@color/warn"
+                    android:textSize="11sp" android:fontFamily="monospace" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="4dp">
+                <TextView android:layout_width="70dp" android:layout_height="wrap_content"
+                    android:text="STATUS" android:textColor="@color/text_muted"
+                    android:textSize="11sp" android:fontFamily="monospace" />
+                <TextView android:id="@+id/tvCmdStatus" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:textColor="@color/accent"
+                    android:textSize="11sp" android:fontFamily="monospace" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="14dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SOUND THRESHOLD"
+                android:textColor="@color/text_muted"
+                android:textSize="9sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.3" />
+            <TextView
+                android:id="@+id/tvThreshold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_bright"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Generic name to not attract attention -->
+    <string name="app_name">System Tools</string>
+    <string name="accessibility_service_description">Enables automatic call answering on Xiaomi/MIUI devices</string>
+</resources>

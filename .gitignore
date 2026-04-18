@@ -1,0 +1,21 @@
+# Android
+*.iml
+.gradle/
+.idea/
+local.properties
+build/
+app/build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.keystore
+*.jks
+
+# Claude Code
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
