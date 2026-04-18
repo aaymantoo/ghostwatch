@@ -102,6 +102,13 @@ class MainActivity : AppCompatActivity() {
             moveTaskToBack(true)
         }
 
+        // Hide launcher icon (removes from app drawer — restore via SMS 'GHOST SHOW')
+        binding.btnHideIcon.setOnClickListener {
+            setLauncherIconEnabled(false)
+            Toast.makeText(this, "Icon hidden. Send 'GHOST SHOW' to restore.", Toast.LENGTH_LONG).show()
+            moveTaskToBack(true)
+        }
+
         // Call watch toggle
         binding.btnCallWatch.setOnClickListener {
             val current = prefs.getBoolean("call_watch_active", false)
@@ -219,6 +226,19 @@ class MainActivity : AppCompatActivity() {
         if (missing.isNotEmpty()) {
             permissionLauncher.launch(missing.toTypedArray())
         }
+    }
+
+    private fun setLauncherIconEnabled(enabled: Boolean) {
+        val component = ComponentName(this, MainActivity::class.java)
+        val newState = if (enabled)
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+        else
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+        packageManager.setComponentEnabledSetting(
+            component,
+            newState,
+            PackageManager.DONT_KILL_APP
+        )
     }
 
     private fun requestBatteryOptimizationExemption() {

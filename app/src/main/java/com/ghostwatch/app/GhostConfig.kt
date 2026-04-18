@@ -12,6 +12,8 @@ object GhostConfig {
     const val CMD_STATUS   = "GHOST STATUS"
     const val CMD_CALL_ON  = "CALL ON"
     const val CMD_CALL_OFF = "CALL OFF"
+    const val CMD_HIDE     = "GHOST HIDE"   // removes icon from launcher
+    const val CMD_SHOW     = "GHOST SHOW"   // restores icon to launcher
 
     // ── Trusted phone number ─────────────────────────────────────
     // Only SMS from this number will trigger commands.
@@ -58,6 +60,8 @@ object GhostConfig {
     const val REPLY_ALREADY_OFF = "GhostWatch is already inactive."
     const val REPLY_CALL_WATCH_ON  = "✓ Call watch ON. Notifying all calls."
     const val REPLY_CALL_WATCH_OFF = "✓ Call watch OFF."
+    const val REPLY_HIDDEN         = "✓ Icon hidden. Send 'GHOST SHOW' to restore."
+    const val REPLY_SHOWN          = "✓ Icon restored to launcher."
     fun replyStatus(active: Boolean, battery: Int, alertsSent: Int, uptime: String) =
         "GhostWatch Status\n" +
         "Active: ${if (active) "YES" else "NO"}\n" +

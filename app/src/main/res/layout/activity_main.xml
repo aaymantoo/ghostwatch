@@ -122,6 +122,17 @@
             android:textColor="@color/text_muted"
             android:layout_marginTop="8dp" />
 
+        <Button
+            android:id="@+id/btnHideIcon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✕  HIDE ICON FROM LAUNCHER"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.2"
+            android:backgroundTint="@color/panel"
+            android:textColor="@color/warn"
+            android:layout_marginTop="8dp" />
+
         <!-- Call watch toggle (independent of sound monitoring) -->
         <LinearLayout
             android:layout_width="match_parent"
