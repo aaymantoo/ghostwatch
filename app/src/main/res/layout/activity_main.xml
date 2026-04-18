@@ -321,37 +321,6 @@
             android:layout_marginBottom="12dp" />
 
         <!-- Config rows -->
-        <include layout="@layout/config_row"
-            android:id="@+id/rowTrusted" />
-
-        <!-- We'll set these programmatically but define the structure -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/card_bg"
-            android:padding="14dp"
-            android:layout_marginBottom="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TRUSTED NUMBER"
-                android:textColor="@color/text_muted"
-                android:textSize="9sp"
-                android:fontFamily="monospace"
-                android:letterSpacing="0.3" />
-            <TextView
-                android:id="@+id/tvTrustedNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+91XXXXXXXXXX"
-                android:textColor="@color/text_bright"
-                android:textSize="13sp"
-                android:fontFamily="monospace"
-                android:layout_marginTop="4dp" />
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

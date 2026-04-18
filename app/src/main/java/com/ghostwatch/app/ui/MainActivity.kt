@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity() {
             }
             startForegroundService(intent)
             prefs.edit().putBoolean("was_active", true).apply()
+            GhostService.isActive.set(true)  // optimistic update — service sets this async
             updateUI()
         }
 
@@ -94,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             }
             startService(intent)
             prefs.edit().putBoolean("was_active", false).apply()
+            GhostService.isActive.set(false)  // optimistic update — service sets this async
             updateUI()
         }
 
@@ -142,7 +144,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Show config
-        binding.tvTrustedNumber.text = GhostConfig.TRUSTED_NUMBER
         binding.tvCmdStart.text  = GhostConfig.CMD_START
         binding.tvCmdStop.text   = GhostConfig.CMD_STOP
         binding.tvCmdStatus.text = GhostConfig.CMD_STATUS
