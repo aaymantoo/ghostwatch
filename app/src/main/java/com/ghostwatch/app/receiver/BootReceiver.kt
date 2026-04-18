@@ -10,9 +10,9 @@ import com.ghostwatch.app.service.GhostService
 class BootReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        val action = intent.action ?: return
-        if (action != Intent.ACTION_BOOT_COMPLETED &&
-            action != Intent.ACTION_MY_PACKAGE_REPLACED) return
+        val receivedAction = intent.action ?: return
+        if (receivedAction != Intent.ACTION_BOOT_COMPLETED &&
+            receivedAction != Intent.ACTION_MY_PACKAGE_REPLACED) return
 
         Log.d("BootReceiver", "Boot completed — checking if GhostWatch should restart")
 
